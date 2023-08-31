@@ -38,20 +38,25 @@ exports.uploadsModule = async (request, reply) => {
 
 exports.fileNameFindPublic = async (request, reply) => {
     try {
-        const parts = request.files()
+        const dir = request.query.dir
         const country_id = request.params.country_id
         const ticpid_id = request.params.ticpid_id
 
-        const founddirs = fs.readdirSync(path.join(__dirname, `/public/${country_id}/${ticpid_id}`))
+        const founddirs = fs.readdirSync(path.join(__dirname, `/public/${country_id}/${ticpid_id}/${dir || ''}`))
 
-        let model = {}
+        const model = {}
+        const temp = []
 
-        for (let index = 0; index < founddirs.length; index++) {
-            const element = founddirs[index];
-            model.name[index] = `http://127.0.0.1:9000/public/${country_id}/${ticpid_id}/${element}`
+        if (founddirs.length > 0) {
+            for (let index = 0; index < founddirs.length; index++) {
+                const element = founddirs[index];
+                temp.push(`http://127.0.0.1:9000/public/${country_id}/${ticpid_id}/${element}`)
+            }
         }
 
-        reply.send(model)
+        reply.send({
+            data: temp
+        })
 
     } catch (error) {
         reply.send(error)
@@ -60,6 +65,7 @@ exports.fileNameFindPublic = async (request, reply) => {
 
 exports.removeFileFormPublic = async (request, reply) => {
     try {
+        const dir = request.query.dir
         const file_name = request.query.file_name
         const country_id = request.params.country_id
         const ticpid_id = request.params.ticpid_id
@@ -67,7 +73,7 @@ exports.removeFileFormPublic = async (request, reply) => {
         if (!file_name) {
             throw new Error('Not found a file name')
         }
-        const path_dir = path.join(__dirname, `/public/${country_id}/${ticpid_id}/${file_name}`)
+        const path_dir = path.join(__dirname, `/public/${country_id}/${ticpid_id}/${dir || ''}/${file_name}`)
         fs.rmSync(path_dir)
         reply.status(204)
 

@@ -8,7 +8,7 @@ const cors = require('@fastify/cors')
 
 fastify.register(
   helmet,
-  { contentSecurityPolicy: false }
+  { contentSecurityPolicy: false, crossOriginResourcePolicy: { policy: 'cross-origin' } }
 )
 
 fastify.register(cors, {
@@ -19,7 +19,7 @@ fastify.register(multipart, {
   prefix: 'public',
   limits: {
     fieldSize: 10240,
-}
+  }
 })
 
 fastify.register(static, {
