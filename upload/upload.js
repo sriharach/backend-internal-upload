@@ -36,6 +36,14 @@ exports.uploadsModule = async (request, reply) => {
 
 }
 
+exports.indexPage = async (request, reply) => {
+    try {
+        reply.send({ text: "Hello" })
+    } catch (error) {
+        reply.send(error)
+    }
+}
+
 exports.fileNameFindPublic = async (request, reply) => {
     try {
         const dir = request.query.dir

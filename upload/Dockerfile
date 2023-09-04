@@ -1,18 +1,15 @@
-# เลือกฐานข้อมูล Docker image ที่มี Node.js เวอร์ชัน 14
-FROM node:16
+FROM node:18.16.0-alpine
 
-# สร้างโฟลเดอร์ app ในคอนเทนเนอร์และเปลี่ยนไปใช้เป็นโฟลเดอร์ทำงาน
 WORKDIR /app
+RUN apk add g++ make py3-pip
 
-# คัดลอกไฟล์ package.json และ package-lock.json แล้วดำเนินการ npm install
-COPY package*.json ./
+COPY ./package.json .
+
 RUN npm install
 
-# คัดลอกไฟล์โปรเจกต์และไฟล์ที่เกี่ยวข้อง
 COPY . .
 
-# เปิดพอร์ตที่แอปพลิเคชัน Fastify ใช้
 EXPOSE 4012
 
-# รันแอปพลิเคชัน Fastify
+# Command to start the Fastify server
 CMD ["node", "server.js"]
