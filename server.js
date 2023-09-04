@@ -37,7 +37,7 @@ fastify.get('/another/path', async function (req, reply) {
 })
 
 // Run the server!
-fastify.listen({ port: 9000 }, function (err) {
+fastify.listen({ port: 4012 }, function (err) {
   console.log(`server listening on ${fastify.server.address().port}`)
   if (err) {
     fastify.log.error(err)

@@ -4,7 +4,8 @@
   "description": "only uploadflie",
   "main": "server.js",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "start": "pm2 start server.js"
   },
   "author": "",
   "license": "ISC",
