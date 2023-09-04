@@ -4,6 +4,8 @@ const { pipeline } = require('stream')
 const path = require('path')
 
 const pump = util.promisify(pipeline)
+// const end_point = "http://127.0.0.1:9000"
+const end_point = "http://150.95.25.8:4012"
 
 exports.uploadsModule = async (request, reply) => {
     try {
@@ -58,7 +60,7 @@ exports.fileNameFindPublic = async (request, reply) => {
         if (founddirs.length > 0) {
             for (let index = 0; index < founddirs.length; index++) {
                 const element = founddirs[index];
-                temp.push(`http://127.0.0.1:9000/public/${country_id}/${ticpid_id}/${element}`)
+                temp.push(`${end_point}/public/${country_id}/${ticpid_id}/${element}`)
             }
         }
 
