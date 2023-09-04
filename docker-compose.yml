@@ -1,0 +1,48 @@
+version: "3"
+ 
+services:
+  rtn_intelligence_upload:
+    build:
+      context: ./upload
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./upload:/app
+    ports:
+      - 4012:4012
+    command: npm start
+    networks:
+      networks_rtn_intelligence:
+
+  rtn_intelligence_service:
+    image: cmtttbrother/rtn-intelligence-service:v0.0.6
+    restart: always
+    ports:
+      - 4011:4000
+    environment:
+      PORT: 4000
+      DB_USERNAME: postgres
+      DB_PASSWORD: MyTTT@1234
+      DB_NAME: 66K_RTN_Intelligence
+      DB_HOST: 150.95.25.8
+      DB_PORT: 5432
+      CUSTOM_HEADER_KEY: 8O2MnjDqTmmjejW0KlKjdGXxpNS0EToHqXOJoalV53Rug
+      JWT_SECRET: 39wAUs6CYOFVx6p7Z4jWr1919EyTyEhJqFX7f9KO
+      JWT_SECRET_REFRESH: TvDNnridIaHeZt8VPdmR8JMJBeAXg4XRvADNYSa7
+    networks:
+       networks_rtn_intelligence:
+
+  rtn_intelligence_frontend:
+    image: cmtttbrother/rtn-intelligence-frontend:v0.0.5
+    restart: always
+    ports:
+      - 4010:3100
+    environment:
+      PORT: 3100
+      NEXT_PUBLIC_SERVICE: postgres
+      NEXT_PUBLIC_KEY: MyTTT@1234
+    networks:
+       networks_rtn_intelligence:
+
+networks:
+  networks_rtn_intelligence:
