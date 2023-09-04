@@ -2,15 +2,12 @@ version: "3"
  
 services:
   rtn_intelligence_upload:
-    build:
-      context: ./upload
-      dockerfile: Dockerfile
+    image: cmtttbrother/rtn-intelligence-upload:v0.0.1
     restart: always
     volumes:
-      - ./upload:/app
+      - ./filds:/app
     ports:
       - 4012:4012
-    command: npm start
     networks:
       networks_rtn_intelligence:
 
