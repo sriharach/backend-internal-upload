@@ -2,7 +2,7 @@ version: "3"
  
 services:
   rtn_intelligence_upload:
-    image: cmtttbrother/rtn-intelligence-upload:v0.0.6
+    image: cmtttbrother/rtn-intelligence-upload:v1.0.0
     restart: always
     volumes:
       - ./upload:/app
@@ -12,7 +12,7 @@ services:
       networks_rtn_intelligence:
 
   rtn_intelligence_service:
-    image: cmtttbrother/rtn-intelligence-service:v0.0.6
+    image: cmtttbrother/rtn-intelligence-service:v0.0.7
     restart: always
     ports:
       - 4011:4000
@@ -30,7 +30,7 @@ services:
        networks_rtn_intelligence:
 
   rtn_intelligence_frontend:
-    image: cmtttbrother/rtn-intelligence-frontend:v0.0.5
+    image: cmtttbrother/rtn-intelligence-frontend:v0.0.6
     restart: always
     ports:
       - 4010:3100
