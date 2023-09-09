@@ -25,7 +25,7 @@ exports.uploadsModule = async (request, reply) => {
             fs.mkdirSync(toppicPathSet);
         }
         if (!fs.existsSync(initPath)) {
-            fs.mkdirSync(initPath);
+            fs.mkdirSync(initPath, { recursive: true });
         }
 
         for await (const part of parts) {
