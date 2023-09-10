@@ -26,7 +26,7 @@ exports.uploadsModule = async (request, reply) => {
             fs.mkdirSync(toppicPathSet);
         }
         if (!fs.existsSync(initPath)) {
-            fs.mkdirSync(initPath);
+            fs.mkdirSync(initPath, { recursive: true });
         }
 
         for await (const part of parts) {
@@ -56,19 +56,17 @@ exports.fileNameFindPublic = async (request, reply) => {
         const ticpid_id = request.params.ticpid_id
 
         const founddirs = fs.readdirSync(path.join(__dirname, `/public/${country_id}/${ticpid_id}/${dir || ''}`))
-
-        const model = {}
-        const temp = []
-
+        const data = []
         if (founddirs.length > 0) {
             for (let index = 0; index < founddirs.length; index++) {
                 const element = founddirs[index];
-                temp.push(`${end_point}/public/${country_id}/${ticpid_id}/${element}`)
+                const path_dir = dir ? `${dir}/` : ""
+                data.push(`${end_point}/public/${country_id}/${ticpid_id}/${path_dir}${element}`)
             }
         }
 
         reply.send({
-            data: temp
+            data
         })
 
     } catch (error) {
