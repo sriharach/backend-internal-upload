@@ -18,7 +18,7 @@ fastify.register(cors, {
 fastify.register(multipart, {
   prefix: 'public',
   limits: {
-    fieldSize: 10240,
+    fileSize: 10 * 1024 * 1024,
   }
 })
 

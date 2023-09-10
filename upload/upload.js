@@ -4,10 +4,11 @@ const { pipeline } = require('stream')
 const path = require('path')
 
 const pump = util.promisify(pipeline)
-// const end_point = "http://127.0.0.1:9000"
-const end_point = "http://150.95.25.8:4012"
+const end_point = "http://127.0.0.1:9000"
+// const end_point = "http://150.95.25.8:4012"
 
 exports.uploadsModule = async (request, reply) => {
+    let path_dir = ''
     try {
         const parts = await request.files()
         const dir = request.query.dir
@@ -29,11 +30,13 @@ exports.uploadsModule = async (request, reply) => {
         }
 
         for await (const part of parts) {
+            path_dir = `${initPath}/${part.filename}`
             await pump(part.file, fs.createWriteStream(`${initPath}/${part.filename}`))
         }
         reply.status(204)
     } catch (error) {
         reply.send(error)
+        if (path_dir) fs.rmSync(path_dir)
     }
 
 }
