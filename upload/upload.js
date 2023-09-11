@@ -4,7 +4,7 @@ const { pipeline } = require('stream')
 const path = require('path')
 
 const pump = util.promisify(pipeline)
-// const end_point = "http://127.0.0.1:9000"
+// const end_point = "http://127.0.0.1:4012"
 const end_point = "http://150.95.25.8:4012"
 
 exports.uploadsModule = async (request, reply) => {
@@ -33,7 +33,16 @@ exports.uploadsModule = async (request, reply) => {
             path_dir = `${initPath}/${part.filename}`
             await pump(part.file, fs.createWriteStream(`${initPath}/${part.filename}`))
         }
-        reply.status(204)
+        const founddirs = fs.readdirSync(path.join(__dirname, `/public/${country_id}/${ticpid_id}/${dir || ''}`))
+        const data = []
+        if (founddirs.length > 0) {
+            for (let index = 0; index < founddirs.length; index++) {
+                const element = founddirs[index];
+                const path_dir = dir ? `${dir}/` : ""
+                data.push(`${end_point}/public/${country_id}/${ticpid_id}/${path_dir}${element}`)
+            }
+        }
+        reply.send({ data })
     } catch (error) {
         reply.send(error)
         if (path_dir) fs.rmSync(path_dir)
