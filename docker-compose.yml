@@ -2,7 +2,7 @@ version: "3"
  
 services:
   rtn_intelligence_upload:
-    image: cmtttbrother/rtn-intelligence-upload:v1.0.2
+    image: cmtttbrother/rtn-intelligence-upload:v1.0.3
     restart: always
     volumes:
       - ./upload:/app
