@@ -12,7 +12,7 @@ services:
       networks_rtn_intelligence:
 
   rtn_intelligence_service:
-    image: cmtttbrother/rtn-intelligence-service:v1.0.0
+    image: cmtttbrother/rtn-intelligence-service:v1.0.1
     restart: always
     ports:
       - 4011:4000
@@ -30,7 +30,7 @@ services:
        networks_rtn_intelligence:
 
   rtn_intelligence_frontend:
-    image: cmtttbrother/rtn-intelligence-frontend:v1.0.1
+    image: cmtttbrother/rtn-intelligence-frontend:v1.0.2
     restart: always
     ports:
       - 4010:3100
