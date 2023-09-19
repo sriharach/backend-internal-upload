@@ -2,10 +2,11 @@ const fs = require('fs')
 const util = require('util')
 const { pipeline } = require('stream')
 const path = require('path')
+require('dotenv').config()
 
 const pump = util.promisify(pipeline)
-// const end_point = "http://127.0.0.1:4012"
-const end_point = "http://150.95.25.8:4012"
+
+const HOSTNAME = process.env.HOSTNAME_SERVICE
 
 exports.uploadsModule = async (request, reply) => {
     let path_dir = ''
@@ -39,7 +40,7 @@ exports.uploadsModule = async (request, reply) => {
             for (let index = 0; index < founddirs.length; index++) {
                 const element = founddirs[index];
                 const path_dir = dir ? `${dir}/` : ""
-                data.push(`${end_point}/public/${country_id}/${ticpid_id}/${path_dir}${element}`)
+                data.push(`${HOSTNAME}/public/${country_id}/${ticpid_id}/${path_dir}${element}`)
             }
         }
         reply.send({ data })
@@ -52,7 +53,8 @@ exports.uploadsModule = async (request, reply) => {
 
 exports.indexPage = async (request, reply) => {
     try {
-        reply.send({ text: "Hello" })
+        // reply.send({ text: "Hello" })
+        reply.send({ host: process.env.HOSTNAME_SERVICE })
     } catch (error) {
         reply.send(error)
     }
@@ -70,7 +72,7 @@ exports.fileNameFindPublic = async (request, reply) => {
             for (let index = 0; index < founddirs.length; index++) {
                 const element = founddirs[index];
                 const path_dir = dir ? `${dir}/` : ""
-                data.push(`${end_point}/public/${country_id}/${ticpid_id}/${path_dir}${element}`)
+                data.push(`${HOSTNAME}/public/${country_id}/${ticpid_id}/${path_dir}${element}`)
             }
         }
 

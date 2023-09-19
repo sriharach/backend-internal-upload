@@ -15,6 +15,7 @@
     "@fastify/multipart": "^7.7.3",
     "@fastify/static": "^6.10.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "fastify": "^4.21.0"
   }
 }
