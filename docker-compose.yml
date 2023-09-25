@@ -8,6 +8,8 @@ services:
       - ./upload:/app
     ports:
       - 4012:4012
+    environment:
+      HOSTNAME_SERVICE: http://150.95.25.8:4012/
     networks:
       networks_rtn_intelligence:
 
