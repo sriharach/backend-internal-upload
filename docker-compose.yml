@@ -32,14 +32,15 @@ services:
        networks_rtn_intelligence:
 
   rtn_intelligence_frontend:
-    image: cmtttbrother/rtn-intelligence-frontend:v1.1.3
+    image: cmtttbrother/rtn-intelligence-frontend:v1.1.4
     restart: always
     ports:
       - 4010:3100
     environment:
       PORT: 3100
-      NEXT_PUBLIC_SERVICE: postgres
-      NEXT_PUBLIC_KEY: MyTTT@1234
+      NEXT_PUBLIC_SERVICE: http://150.95.25.8:4011/api
+      NEXT_PUBLIC_UPLOAD: http://150.95.25.8:4012
+      NEXT_PUBLIC_KEY: 8O2MnjDqTmmjejW0KlKjdGXxpNS0EToHqXOJoalV53Rug
     networks:
        networks_rtn_intelligence:
 
