@@ -32,7 +32,7 @@ services:
        networks_rtn_intelligence:
 
   rtn_intelligence_frontend:
-    image: cmtttbrother/rtn-intelligence-frontend:v1.2.5
+    image: cmtttbrother/rtn-intelligence-frontend:v1.2.7
     restart: always
     ports:
       - 4010:3100
