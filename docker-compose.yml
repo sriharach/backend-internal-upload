@@ -14,7 +14,7 @@ services:
       networks_rtn_intelligence:
 
   rtn_intelligence_service:
-    image: cmtttbrother/rtn-intelligence-service:v1.2.0
+    image: cmtttbrother/rtn-intelligence-service:v1.2.1
     restart: always
     ports:
       - 4011:4000
