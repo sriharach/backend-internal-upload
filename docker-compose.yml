@@ -35,9 +35,9 @@ services:
     image: cmtttbrother/rtn-intelligence-frontend:v1.2.8
     restart: always
     ports:
-      - 4010:3100
+      - 4010:80
     environment:
-      PORT: 3100
+      PORT: 80
       NEXT_PUBLIC_SERVICE: http://150.95.25.8:4011/api
       NEXT_PUBLIC_UPLOAD: http://150.95.25.8:4012
       NEXT_PUBLIC_KEY: 8O2MnjDqTmmjejW0KlKjdGXxpNS0EToHqXOJoalV53Rug
